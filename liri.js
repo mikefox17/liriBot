@@ -16,6 +16,14 @@ switch (action) {
   case "movie-this":
     movie(inputs);
     break;
+
+  case "concert-this":
+    concert(inputs);
+    break;
+
+  case "do-what-it-says":
+    doIt(inputs);
+    break;
 }
 
 function movie(inputs) {
