@@ -33,9 +33,9 @@ function movie(inputs) {
     "http://www.omdbapi.com/?t=" + inputs + "&y=&plot=short&apikey=trilogy";
 
   request(queryUrl, function(error, response, body) {
-    if (!inputs) {
-      inputs = "Mr Nobody";
-    }
+    // if (!inputs) {
+    //   inputs = "Mr Nobody";
+    // }
     //Shorthand for console logging the results
     var results = JSON.parse(body);
     //If no error than results are displayed
@@ -72,5 +72,11 @@ function concert(inputs) {
         "Date of Event: " + moment(result.datetime).format("MM/DD/YYYY")
       );
     }
+  });
+}
+//Function to read the random.txt file
+function doIt(inputs) {
+  fs.readFile("random.txt", "utf-8", function(err, buf) {
+    console.log(buf.toString());
   });
 }
