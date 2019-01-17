@@ -12,6 +12,7 @@ var inputs = input[3];
 //Switches for user actions
 switch (action) {
   case "spotify-this-song":
+    his;
     spotify(inputs);
     break;
 
@@ -33,9 +34,10 @@ function movie(inputs) {
     "http://www.omdbapi.com/?t=" + inputs + "&y=&plot=short&apikey=trilogy";
 
   request(queryUrl, function(error, response, body) {
-    // if (!inputs) {
-    //   inputs = "Mr Nobody";
-    // }
+    if (!inputs) {
+      inputs = "Mr Nobody";
+    }
+
     //Shorthand for console logging the results
     var results = JSON.parse(body);
     //If no error than results are displayed
@@ -78,5 +80,30 @@ function concert(inputs) {
 function doIt(inputs) {
   fs.readFile("random.txt", "utf-8", function(err, buf) {
     console.log(buf.toString());
+  });
+}
+
+//Spotify API call
+function spotify(inputs) {
+  //.ENV stored keys to stay hidden
+  var spotify = new Spotify({
+    id: process.env.SPOTIFY_ID,
+    secret: process.env.SPOTIFY_SECRET
+  });
+
+  if (!inputs) {
+    inputs = "The Sign";
+  }
+  spotify.search({ type: "track", query: inputs }, function(err, data) {
+    if (err) {
+      console.log("Error occurred: " + err);
+      return;
+    }
+
+    var songInfo = data.tracks.items;
+    console.log("Artist(s): " + songInfo[0].artists[0].name);
+    console.log("Song Name: " + songInfo[0].name);
+    console.log("Preview Link: " + songInfo[0].preview_url);
+    console.log("Album: " + songInfo[0].album.name);
   });
 }
