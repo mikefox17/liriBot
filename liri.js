@@ -8,11 +8,10 @@ var moment = require("moment");
 //VAR's for user action and inputs
 var input = process.argv;
 var action = input[2];
-var inputs = input[3];
+var inputs = input.slice(3).join(" ");
 //Switches for user actions
 switch (action) {
   case "spotify-this-song":
-    his;
     spotify(inputs);
     break;
 
@@ -34,8 +33,8 @@ function movie(inputs) {
     "http://www.omdbapi.com/?t=" + inputs + "&y=&plot=short&apikey=trilogy";
 
   request(queryUrl, function(error, response, body) {
-    if (!inputs) {
-      inputs = "Mr Nobody";
+    if (inputs === undefined) {
+      inputs = "TESTING";
     }
 
     //Shorthand for console logging the results
@@ -91,8 +90,8 @@ function spotify(inputs) {
     secret: process.env.SPOTIFY_SECRET
   });
 
-  if (!inputs) {
-    inputs = "The Sign";
+  if (inputs === undefined || null) {
+    inputs = "TESTING";
   }
   spotify.search({ type: "track", query: inputs }, function(err, data) {
     if (err) {
