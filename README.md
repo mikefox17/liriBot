@@ -1,6 +1,6 @@
 # liriBot
 
-####### A backend application that hits multiple API's for obtaining information about movies, songs, and converts.
+A backend application that hits multiple API's for obtaining information about movies, songs, and converts.
 
 commands for this application:
 
